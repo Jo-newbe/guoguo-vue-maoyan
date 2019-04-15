@@ -15,11 +15,11 @@ export default {
   props: {
     back: {
       type: Boolean,
-      default: true
+      default: false
     },
     text: {
       type: String,
-      default: "maoshi Movie"
+      default: "猫眼电影"
     }
   }
 };
