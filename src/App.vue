@@ -1,16 +1,16 @@
 <template>
-  <div id="app">
-   
-  </div>
+  <Movie/>
 </template>
 
 <script>
+import Movie from "./components/Movie/";
+
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    
+    Movie
   }
-}
+};
 </script>
 
 <style>
