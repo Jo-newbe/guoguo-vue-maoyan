@@ -1,3 +1,9 @@
+const path = require('path')
+
+function resolve(url) {
+  return path.resolve(__dirname, url)
+}
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -22,5 +28,10 @@ module.exports = {
         pathRewrite: { '^/maoyan': '' } // 路径重写 /maoyan => http://m.maoyan.com
       }
     }
+  },
+  chainWebpack: config => {
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('pages', resolve('src/pages'))
   }
 }

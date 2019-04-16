@@ -2,15 +2,21 @@
   <section class="topbar">
     <div class="white-bg topbar-bg">
       <div class="city-entry">
-        <span class="city-name">上海</span>
-        <i class="city-entry-arrow"></i>
+        <router-link to="/city-list">
+          <span class="city-name">上海</span>
+          <i class="city-entry-arrow"></i>
+        </router-link>
       </div>
 
       <div class="switch-hot" data-active=".n-hot">
-        <div class="hot-item active" data-tab=".n-hot">正在热映</div>
-        <div class="hot-item" data-tab=".f-hot">即将上映</div>
+        <div class="hot-item active" data-tab=".n-hot">
+          <router-link to="/movie/.n-hot">正在热映</router-link>
+        </div>
+        <div class="hot-item" data-tab=".f-hot">
+          <router-link to="/movie/.f-hot">即将上映</router-link>
+        </div>
       </div>
-      <div class="search-entry search-icon" data-type="movie"></div>
+      <div class="search-entry search-icon" data-type="movie" @click="goToSearch"></div>
     </div>
   </section>
 </template>
@@ -18,7 +24,15 @@
 
 <script>
 export default {
-  name: "TopBar"
+  name: "TopBar",
+  methods: {
+    goToSearch() {
+      // console.log(1);
+      // 实现编程时导航
+      this.$router.push("/search");
+      // replace
+    }
+  }
 };
 </script>
 

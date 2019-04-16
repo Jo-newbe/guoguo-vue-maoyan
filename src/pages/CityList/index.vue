@@ -1,9 +1,9 @@
 <template>
-  <router-view></router-view>
+  <div>city - list</div>
 </template>
 
 <script>
 export default {
-  name: "app"
+  name: "CityList"
 };
 </script>
