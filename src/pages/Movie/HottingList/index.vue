@@ -95,8 +95,6 @@ export default {
         click: true,
         probeType: 1
       });
-
-      console.log(this._scroll);
     }
   },
   mounted() {
@@ -117,10 +115,6 @@ export default {
 
       this._scroll.refresh();
     });
-  },
-  beforeRouteEnter(to, from, next) {
-    console.log(to, from);
-    next();
   }
 };
 </script>

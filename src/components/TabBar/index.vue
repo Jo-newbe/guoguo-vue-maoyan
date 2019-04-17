@@ -60,7 +60,7 @@ export default {
   props: {
     selectedTab: {
       type: String,
-      default: ".movie"
+      required: true
     }
   }
 };
