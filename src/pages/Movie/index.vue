@@ -1,9 +1,9 @@
 <template>
   <div class="movie">
     <AppHeader/>
-    <TopBar/>
+    <TopBar :selected-tab="selectedTopTab" @change-tab="selectedTopTab=$event"/>
     <router-view></router-view>
-    <TabBar/>
+    <TabBar :selected-tab="selectedTab"/>
   </div>
 </template>
 
@@ -14,6 +14,12 @@ import TabBar from "@/components/TabBar/";
 
 export default {
   name: "Movie",
+  data() {
+    return {
+      selectedTopTab: ".n-hot",
+      selectedTab: ".movie"
+    };
+  },
   components: {
     AppHeader,
     TopBar,

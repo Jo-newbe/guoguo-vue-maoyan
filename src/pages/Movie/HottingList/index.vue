@@ -117,6 +117,10 @@ export default {
 
       this._scroll.refresh();
     });
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to, from);
+    next();
   }
 };
 </script>

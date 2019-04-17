@@ -7,8 +7,6 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-// import './assets/css/index.css'
-
 // Vue.prototype.$router = router
 
 new Vue({

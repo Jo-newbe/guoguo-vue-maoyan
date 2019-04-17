@@ -13,6 +13,7 @@ Vue.use(VueRouter)
 // 定义路由系统
 // 1 创建路由实例 获取存储所有的路a由
 const router = new VueRouter({
+  linkActiveClass: 'active', // 配置全局的router-link激活样式
   routes: [
     { path: '/', redirect: '/movie/.n-hot' },
     { path: '/city-list', component: CityList },
