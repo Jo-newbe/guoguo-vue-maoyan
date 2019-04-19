@@ -2,7 +2,9 @@
   <div class="movie">
     <AppHeader/>
     <TopBar :selected-tab="selectedTopTab" @change-tab="selectedTopTab=$event"/>
-    <router-view></router-view>
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
     <TabBar :selected-tab="selectedTab"/>
   </div>
 </template>

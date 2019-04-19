@@ -3,7 +3,7 @@
     <div class="white-bg topbar-bg">
       <div class="city-entry">
         <router-link to="/city-list" active-class="active">
-          <span class="city-name">上海</span>
+          <span class="city-name">{{ city }}</span>
           <i class="city-entry-arrow"></i>
         </router-link>
       </div>
@@ -53,6 +53,11 @@ export default {
       required: true
     }
   },
+  computed: {
+    city() {
+      return this.$store.state.city;
+    }
+  },
   methods: {
     goToSearch() {
       // console.log(1);
@@ -68,6 +73,7 @@ export default {
 .topbar {
   border-bottom: 1px solid #e6e6e6;
   height: 44px;
+  width: 100%;
 }
 
 .topbar-bg {

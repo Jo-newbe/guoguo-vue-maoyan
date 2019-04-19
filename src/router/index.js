@@ -15,18 +15,19 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   linkActiveClass: 'active', // 配置全局的router-link激活样式
   routes: [
-    { path: '/', redirect: '/movie/.n-hot' },
-    { path: '/city-list', component: CityList },
+    { path: '/', redirect: '/movie/.n-hot', name: 'home' },
+    { path: '/city-list', component: CityList, name: 'cityList' },
     {
       path: '/movie',
       component: Movie,
+      name: 'movie',
       children: [
-        { path: '.n-hot', component: HottingList },
-        { path: '.f-hot', component: ComingList }
+        { path: '.n-hot', component: HottingList, name: 'hotList' },
+        { path: '.f-hot', component: ComingList, name: 'comingList' }
       ]
     },
-    { path: '/cinema', component: Cinema },
-    { path: '/my', component: My }
+    { path: '/cinema', component: Cinema, name: 'cinema' },
+    { path: '/my', component: My, name: 'my' }
   ]
 })
 

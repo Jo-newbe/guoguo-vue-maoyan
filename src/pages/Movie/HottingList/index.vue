@@ -54,27 +54,24 @@ export default {
   name: "HottingList",
   data() {
     return {
-      movieList: []
+      movieList: [],
+      movieIds: [],
+      count: 1,
+      noMoreData: false
     };
   },
   methods: {
-    showToastMask() {
-      var toast = (this._toast = this.$createToast({
-        txt: "Loading...",
-        mask: true
-      }));
-      toast.show();
-    },
     loadData(callback) {
       // 先显示loading
-      this.showToastMask();
+      this.$toast.show();
       axios
         .get("/maoyan/ajax/movieOnInfoList?token=")
         .then(response => {
           if (response.status === 200) {
             this.movieList = response.data.movieList;
+            this.movieIds = response.data.movieIds;
             // 数据加载 成功后 隐藏loading
-            this._toast.hide();
+            this.$toast.hide();
             // 在下一次事件循环 开始 之前  去刷新scroll 让其 重新计算scroll height
             // callback();
             this.$nextTick(callback);
@@ -84,6 +81,44 @@ export default {
           console.log(error);
         });
     },
+    loadRefreshData() {
+      // 如果没有数据了 就不用向下执行
+      if (this.noMoreData) {
+        this._scroll.finishPullDown();
+        return;
+      }
+      // 计算边界
+      // 10 ids start?
+      let start = 12;
+
+      if (this.count > 1) {
+        start = 12 + (this.count - 1) * 10;
+      }
+      if (start >= 66) {
+        this.noMoreData = true;
+        return;
+      }
+      let end = start + 10;
+
+      if (end >= 66) {
+        this.noMoreData = true;
+      }
+
+      console.log(this.movieIds.slice(start, end).toString());
+      axios
+        .get("/maoyan/ajax/moreComingList", {
+          params: {
+            token: "",
+            movieIds: this.movieIds.slice(start, end).toString()
+          }
+        })
+        .then(res => {
+          this.movieList = [...res.data.coming, ...this.movieList];
+          this._scroll.finishPullDown();
+          this.count++;
+        });
+    },
+    loadMoreData() {},
     _initScroll() {
       const { wrapper } = this.$refs;
       // 如果已经存在了 scroll实例 就让其刷新
@@ -93,8 +128,22 @@ export default {
       }
       this._scroll = new BScroll(wrapper, {
         click: true,
-        probeType: 1
+        probeType: 1,
+        pullDownRefresh: {
+          threshold: 60,
+          stop: 30
+        }
       });
+
+      // 注册下拉事件
+      this._scroll.on("pullingDown", () => {
+        this.loadRefreshData();
+      });
+    }
+  },
+  computed: {
+    toastOpts() {
+      return this.$store.state.toastOpts;
     }
   },
   mounted() {
