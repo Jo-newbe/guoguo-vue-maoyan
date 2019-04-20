@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import cityData from "@/data/cities.json";
 
 export default {
@@ -80,9 +81,10 @@ export default {
   methods: {
     // 选中 某个城市 后触发
     selectItem(item) {
-      this.$store.commit("setCity", item.nm);
+      this.setCity(item.nm);
       this.$router.push({ name: "home" });
-    }
+    },
+    ...mapMutations(["setCity"])
   },
   mounted() {
     this.$refs.wrapper.style.height = window.screen.height / 100 + "rem";

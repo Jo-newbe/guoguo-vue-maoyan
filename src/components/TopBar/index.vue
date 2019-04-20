@@ -3,7 +3,7 @@
     <div class="white-bg topbar-bg">
       <div class="city-entry">
         <router-link to="/city-list" active-class="active">
-          <span class="city-name">{{ city }}</span>
+          <span class="city-name">{{ city.name }}</span>
           <i class="city-entry-arrow"></i>
         </router-link>
       </div>
@@ -27,6 +27,8 @@
 
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "TopBar",
   data() {
@@ -54,9 +56,7 @@ export default {
     }
   },
   computed: {
-    city() {
-      return this.$store.state.city;
-    }
+    ...mapState(["city"])
   },
   methods: {
     goToSearch() {

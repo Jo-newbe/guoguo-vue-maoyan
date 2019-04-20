@@ -16,7 +16,8 @@ const vm = new Vue({
   router, // 在Vue应用程序上 注入 路由系统
   store,
   render: h => h(App)
-}).$mount('#app')
+})
 
 // 添加toast
-Vue.prototype.$toast = vm.$createToast(store.state.toastOpts)
+Vue.prototype.$toast = vm.$createToast(store.getters.options)
+vm.$mount('#app')
